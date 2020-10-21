@@ -28,12 +28,13 @@ namespace ArcheryTuningTool
             Other
         };
 
+        private List<Ellipse> targetGraphics;
         private EBowStyle eBowStyle;
         private bool bRightHanded;
         private int nFletched;
-        private Ring<ArrowGraphic> lFletched;
+        private Ring<FletchedGraphic> lFletched;
         private int nBareshaft;
-        private Ring<ArrowGraphic> lBareshaft;
+        private Ring<BareshaftGraphic> lBareshaft;
         private int nPoundage;
         private int nDrawLength;
         private string sSpine;
@@ -46,8 +47,138 @@ namespace ArcheryTuningTool
         public MainWindow()
         {
             InitializeComponent();
+            SetupTargetGraphics();
             SetupComboBoxes();
+            lFletched = new Ring<FletchedGraphic>(nFletched);
+            lBareshaft = new Ring<BareshaftGraphic>(nBareshaft);
+        }
 
+        private void SetupTargetGraphics()
+        {
+            targetGraphics = new List<Ellipse>();
+
+            Ellipse white1 = new Ellipse();
+            white1.Width = 400;
+            white1.Height = 400;
+            white1.Margin = new Thickness(0);
+            white1.Fill = Brushes.White;
+            white1.Stroke = Brushes.Black;
+            white1.StrokeThickness = 1;
+            white1.Opacity = 100;
+            white1.Stretch = Stretch.UniformToFill;
+
+            Ellipse white2 = new Ellipse();
+            white2.Width = 360;
+            white2.Height = 360;
+            white2.Margin = new Thickness(20);
+            white2.Fill = Brushes.White;
+            white2.Stroke = Brushes.Black;
+            white2.StrokeThickness = 1;
+            white2.Opacity = 100;
+            white2.Stretch = Stretch.UniformToFill;
+            
+            Ellipse black1 = new Ellipse();
+            black1.Width = 320;
+            black1.Height = 320;
+            black1.Margin = new Thickness(40);
+            black1.Fill = Brushes.Black;
+            black1.Stroke = Brushes.White;
+            black1.StrokeThickness = 1;
+            black1.Opacity = 100;
+            black1.Stretch = Stretch.UniformToFill;
+            
+            Ellipse black2 = new Ellipse();
+            black2.Width = 280;
+            black2.Height = 280;
+            black2.Margin = new Thickness(60);
+            black2.Fill = Brushes.Black;
+            black2.Stroke = Brushes.White;
+            black2.StrokeThickness = 1;
+            black2.Opacity = 100;
+            black2.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse blue1 = new Ellipse();
+            blue1.Width = 240;
+            blue1.Height = 240;
+            blue1.Margin = new Thickness(80);
+            blue1.Fill = Brushes.Aqua;
+            blue1.Stroke = Brushes.Black;
+            blue1.StrokeThickness = 1;
+            blue1.Opacity = 100;
+            blue1.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse blue2 = new Ellipse();
+            blue2.Width = 200;
+            blue2.Height = 200;
+            blue2.Margin = new Thickness(100);
+            blue2.Fill = Brushes.Aqua;
+            blue2.Stroke = Brushes.Black;
+            blue2.StrokeThickness = 1;
+            blue2.Opacity = 100;
+            blue2.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse red1 = new Ellipse();
+            red1.Width = 160;
+            red1.Height = 160;
+            red1.Margin = new Thickness(120);
+            red1.Fill = Brushes.Red;
+            red1.Stroke = Brushes.Black;
+            red1.StrokeThickness = 1;
+            red1.Opacity = 100;
+            red1.Stretch = Stretch.UniformToFill; 
+           
+            Ellipse red2 = new Ellipse();
+            red2.Width = 120;
+            red2.Height = 120;
+            red2.Margin = new Thickness(140);
+            red2.Fill = Brushes.Red;
+            red2.Stroke = Brushes.Black;
+            red2.StrokeThickness = 1;
+            red2.Opacity = 100;
+            red2.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse gold1 = new Ellipse();
+            gold1.Width = 80;
+            gold1.Height = 80;
+            gold1.Margin = new Thickness(160);
+            gold1.Fill = Brushes.Yellow;
+            gold1.Stroke = Brushes.Black;
+            gold1.StrokeThickness = 1;
+            gold1.Opacity = 100;
+            gold1.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse gold2 = new Ellipse();
+            gold2.Width = 40;
+            gold2.Height = 40;
+            gold2.Margin = new Thickness(180);
+            gold2.Fill = Brushes.Yellow;
+            gold2.Stroke = Brushes.Black;
+            gold2.StrokeThickness = 1;
+            gold2.Opacity = 100;
+            gold2.Stretch = Stretch.UniformToFill; 
+            
+            Ellipse spider = new Ellipse();
+            spider.Width = 1;
+            spider.Height = 1;
+            spider.Margin = new Thickness(200);
+            spider.Fill = Brushes.Black;
+            spider.Stroke = Brushes.Black;
+            spider.StrokeThickness = 1;
+            spider.Opacity = 100;
+            spider.Stretch = Stretch.UniformToFill;
+
+            AddTargetGraphic();
+            targetGraphics.Add(white1);
+            targetGraphics.Add(white2);
+            targetGraphics.Add(black1);
+            targetGraphics.Add(black2);
+            targetGraphics.Add(blue1);
+            targetGraphics.Add(blue2);
+            targetGraphics.Add(red1);
+            targetGraphics.Add(red2);
+            targetGraphics.Add(gold1);
+            targetGraphics.Add(gold2);
+            targetGraphics.Add(spider);
         }
 
         //Setup for combo boxes to add options
@@ -136,29 +267,53 @@ namespace ArcheryTuningTool
 
             if (Keyboard.Modifiers == ModifierKeys.Control) //bareshaft
             {
-                Ellipse bareshaft = new Ellipse();
-                bareshaft.Width = 10;
-                bareshaft.Height = 10;
-                bareshaft.Fill = Brushes.White;
-                bareshaft.Stroke = Brushes.Black;
-                bareshaft.StrokeThickness = 1;
-                bareshaft.VerticalAlignment = VerticalAlignment.Top;
-                bareshaft.HorizontalAlignment = HorizontalAlignment.Left;
-                bareshaft.Margin = new Thickness(mousePos.X, mousePos.Y, 0, 0);
-                target.Children.Add(bareshaft);
+                BareshaftGraphic bareshaft = new BareshaftGraphic(mousePos);
+                lBareshaft.Add(bareshaft);
             }
             else
             {
-                ArrowGraphic fletched = new ArrowGraphic();
-                fletched.Width = 10;
-                fletched.Height = 10;
-                fletched.Fill = Brushes.White;
-                fletched.Stroke = Brushes.Black;
-                fletched.StrokeThickness = 1;
-                fletched.VerticalAlignment = VerticalAlignment.Top;
-                fletched.HorizontalAlignment = HorizontalAlignment.Left;
-                fletched.Margin = new Thickness(mousePos.X, mousePos.Y, 0, 0);
-                target.Children.Add(fletched);
+                FletchedGraphic fletched = new FletchedGraphic(mousePos);
+                lFletched.Add(fletched);
+            }
+
+            UpdateTargetChildren();
+        }
+
+        private void UpdateTargetChildren()
+        {
+            target.Children.Clear();
+            AddTargetGraphic();
+
+            if (lBareshaft.GetSize() > 0)
+            {
+                lBareshaft.ResetHead();
+                for(int i = 0; i < lBareshaft.GetNumElements(); i++)
+                {
+                    BareshaftGraphic bareshaft = (BareshaftGraphic)lBareshaft[i];
+                    if(bareshaft != null)
+                        target.Children.Add(bareshaft);
+                    lBareshaft.MoveNext();
+                }
+            }
+
+            if (lFletched.GetSize() > 0)
+            {
+                lFletched.ResetHead();
+                for(int i = 0; i < lFletched.GetNumElements(); i++)
+                {
+                    FletchedGraphic fletched = (FletchedGraphic)lFletched[i];
+                    if(fletched != null)
+                        target.Children.Add(fletched);      //ienumerator will go through the whole array even if elements are null
+                    lFletched.MoveNext();
+                }
+            }
+        }
+
+        private void AddTargetGraphic()
+        {
+            foreach(Ellipse ellipse in targetGraphics)
+            {
+                target.Children.Add(ellipse);
             }
         }
 
@@ -168,6 +323,8 @@ namespace ArcheryTuningTool
                 nFletched = 3;
             else
                 nFletched = 6;
+            if(lFletched != null)
+                lFletched.SetNumElements(nFletched);
         }
 
         private void CbBareshaft_SelectionChanged(object sender, RoutedEventArgs e)
@@ -176,6 +333,8 @@ namespace ArcheryTuningTool
                 nBareshaft = 1;
             else
                 nBareshaft = 2;
+            if(lBareshaft != null)
+                lBareshaft.SetNumElements(nBareshaft);
         }
     }
 }
