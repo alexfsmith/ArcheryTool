@@ -5,37 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArcheryTuningTool"
         mc:Ignorable="d"
-        Title="Archery Tuning Tool" Height="600" Width="1100">
+        Title="Archery Helper" Height="275" Width="300" ResizeMode="NoResize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="350"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Canvas x:Name="target" Grid.Column="0" Height="400" Width="400" Margin="100,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray" MouseLeftButtonDown="Target_MouseLeftButtonDown"/>
-        <Label Content="Bow Style:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,450,0"/>
-        <ComboBox x:Name="cbBowStyle" Grid.Column="1" Height="23" Width="125" Margin="0,150,325,0" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="CbBowStyle_SelectionChanged"/>
-        
-        <Label Content="Handedness:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,450,0"/>
-        <ComboBox x:Name="cbHands" Grid.Column="1" Height="23" Width="100" Margin="0,190,350,0" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="CbHands_SelectionChanged"/>
-        
-        <Label Content="No. Fletched:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,230,450,0"/>
-        <ComboBox x:Name="cbFletched" Grid.Column="1" Height="23" Width="100" Margin="0,230,350,0" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="CbFletched_SelectionChanged"/>
-        
-        <Label Content="No. Bareshafts:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,270,450,0"/>
-        <ComboBox x:Name="cbBareshaft" Grid.Column="1" Height="23" Width="100" Margin="0,270,350,0" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="CbBareshaft_SelectionChanged"/>
-
-        <Label Content="Poundage:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,310,450,0"/>
-        <TextBox x:Name="tbPoundage" Grid.Column="1" Height="23" Width="100" Margin="0,310,350,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-
-        <Label Content="Draw Length:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,350,450,0"/>
-        <TextBox x:Name="tbDrawLength" Grid.Column="1" Height="23" Width="100" Margin="0,350,350,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-
-        <Label Content="Arrow Length:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,390,450,0"/>
-        <TextBox x:Name="tbArrowLength" Grid.Column="1" Height="23" Width="100" Margin="0,390,350,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-
-        <Label Content="Arrow Spine:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,430,450,0"/>
-        <TextBox x:Name="tbSpine" Grid.Column="1" Height="23" Width="100" Margin="0,430,350,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-
-        <Button x:Name="bnOk" Grid.Column="1" Content="Okay" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnOk_Click"/>
+        <Label Content="Score a round of archery:" Margin="0,0,120,150" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="bnScoring" Content="Go" Height="23" Width="75" Margin="0,0,40,150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnScoring_Click"/>
+        <Label Content="Get help tuning your bow:" Margin="0,0,120,90" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="bnTuning" Content="Go" Height="23" Width="75" Margin="0,0,40,90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnTuning_Click"/>
+        <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
     </Grid>
 </Window>
