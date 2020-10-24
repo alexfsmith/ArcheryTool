@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ArcheryTuningTool
+namespace ArcheryTool
 {
     /// <summary>
     /// Custom shape for fletched arrow graphic

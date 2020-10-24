@@ -1,35 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static ArcheryTool.RoundSelect;
 
-namespace ArcheryTuningTool
+namespace ArcheryTool
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class ScoreEntry : Window
     {
-        private enum EBowStyle
-        {
-            Recurve,
-            Compound,
-            Barebow,
-            Longbow,
-            Other
-        };
-
-        private List<Ellipse> targetGraphics;
+        private ERound eRound;
         private EBowStyle eBowStyle;
+        private int nArchers;
+        private bool bSighters;
+        private RoundSelect rs;
+        private List<Ellipse> targetGraphics;
         private int nArrows;
         private Ring<FletchedGraphic> lArrows;
 
-        public ScoreEntry()
+        public ScoreEntry(ERound round, EBowStyle bowStyle, int archers, bool sighters, RoundSelect rs)
         {
             InitializeComponent();
             SetupTenZoneTargetGraphics();
+            this.rs = rs;
+            eRound = round;
+            eBowStyle = bowStyle;
+            nArchers = archers;
+            bSighters = sighters;
+
+
             lArrows = new Ring<FletchedGraphic>(nArrows);
         }
 
@@ -174,11 +178,6 @@ namespace ArcheryTuningTool
             UpdateTargetChildren();
         }
 
-        private void CbBowStyle_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
 
@@ -208,6 +207,11 @@ namespace ArcheryTuningTool
             {
                 target.Children.Add(ellipse);
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            rs.Close();
         }
     }
 }

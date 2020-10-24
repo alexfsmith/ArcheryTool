@@ -1,16 +1,18 @@
-﻿<Window x:Class="ArcheryTuningTool.MainWindow"
+﻿<Window x:Class="ArcheryTool.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ArcheryTuningTool"
+        xmlns:local="clr-namespace:ArcheryTool"
         mc:Ignorable="d"
         Title="Archery Helper" Height="275" Width="300" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Score a round of archery:" Margin="0,0,120,150" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Button x:Name="bnScoring" Content="Go" Height="23" Width="75" Margin="0,0,40,150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnScoring_Click"/>
-        <Label Content="Get help tuning your bow:" Margin="0,0,120,90" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Button x:Name="bnTuning" Content="Go" Height="23" Width="75" Margin="0,0,40,90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnTuning_Click"/>
+        <Label Content="Score a round of archery:" Margin="0,0,120,200" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="bnScoring" Content="Go" Height="23" Width="75" Margin="0,0,40,200" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnScoring_Click"/>
+        <Label Content="Get help tuning your bow:" Margin="0,0,120,140" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="bnTuning" Content="Go" Height="23" Width="75" Margin="0,0,40,140" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnTuning_Click"/>
+        <Label Content="View previous scored rounds:" Margin="0,0,120,80" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="bnHistory" Content="Go" Height="23" Width="75" Margin="0,0,40,80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnHistory_Click"/>
         <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
     </Grid>
 </Window>

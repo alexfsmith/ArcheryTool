@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Shapes;
 
-namespace ArcheryTuningTool
+namespace ArcheryTool
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -16,14 +16,20 @@ namespace ArcheryTuningTool
 
         private void BnScoring_Click(object sender, RoutedEventArgs e)
         {
-            ScoreEntry scoring = new ScoreEntry();
-            scoring.ShowDialog();
+            RoundSelect round = new RoundSelect(this);
+            this.Visibility = Visibility.Hidden;
+            round.ShowDialog();
         }
 
         private void BnTuning_Click(object sender, RoutedEventArgs e)
         {
             TuningTool tuning = new TuningTool();
             tuning.ShowDialog();
+        }
+
+        private void BnHistory_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void BnClose_Click(object sender, RoutedEventArgs e)

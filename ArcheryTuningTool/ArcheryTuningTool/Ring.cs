@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace ArcheryTuningTool
+namespace ArcheryTool
 {
     class Ring<T> : IEnumerable<UIElement>, IEnumerator<UIElement> where T:UIElement
     {

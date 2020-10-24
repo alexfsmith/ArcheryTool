@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ArcheryTuningTool
+namespace ArcheryTool
 {
     /// <summary>
     /// Interaction logic for TuningTool.xaml
