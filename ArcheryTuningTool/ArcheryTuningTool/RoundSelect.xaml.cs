@@ -81,11 +81,6 @@ namespace ArcheryTool
             cbRound.SelectedIndex = 0;
         }
 
-        private bool Validate()
-        {
-            return false;
-        }
-
         //Message handlers for controls + canvas
         private void CbBowStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -150,7 +145,7 @@ namespace ArcheryTool
 
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Visibility = Visibility.Hidden;
             ScoreEntry score = new ScoreEntry(eRound, eBowStyle, nArchers, bSighters, this);
             score.ShowDialog();
         }

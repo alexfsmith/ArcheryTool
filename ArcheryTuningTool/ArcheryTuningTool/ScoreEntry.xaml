@@ -5,14 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArcheryTool"
         mc:Ignorable="d"
-        Title="Archery Scoring Tool" Height="600" Width="1100" Closing="Window_Closing">
+        Title="Archery Scoring Tool" Height="550" Width="1100" Closing="Window_Closing" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="350"/>
+            <ColumnDefinition Width="*" MinWidth="550"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="target" Grid.Column="0" Height="400" Width="400" Margin="100,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray" MouseLeftButtonDown="Target_MouseLeftButtonDown"/>
+        <Label Content="Click the target to score arrows" Grid.Column="0" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Canvas x:Name="target" Grid.Column="0" Height="420" Width="420" Margin="50" HorizontalAlignment="Center" VerticalAlignment="Top" Background="LightGray" MouseLeftButtonDown="Target_MouseLeftButtonDown"/>
+        <Button x:Name="bnNextArcher" Grid.Column="0" Content="Next Archer" Height="23" Width="100" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="BnNextArcher_Click"/>
 
+        <Label x:Name="labelEnd" Grid.Column="1" Margin="25" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="labelArr1" Content="Arrow 1" Grid.Column="1" Margin="75,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelArr2" Content="Arrow 2" Grid.Column="1" Margin="150,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelArr3" Content="Arrow 3" Grid.Column="1" Margin="225,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelArr4" Content="Arrow 4" Grid.Column="1" Margin="300,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelArr5" Content="Arrow 5" Grid.Column="1" Margin="375,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelArr6" Content="Arrow 6" Grid.Column="1" Margin="450,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        
+        <Label Content="Archer 1:" Grid.Column="1" Margin="15,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbArch1Arr1" Grid.Column="1" Margin="75,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch1Arr2" Grid.Column="1" Margin="150,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch1Arr3" Grid.Column="1" Margin="225,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch1Arr4" Grid.Column="1" Margin="300,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch1Arr5" Grid.Column="1" Margin="375,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch1Arr6" Grid.Column="1" Margin="450,100,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        
+        <Label Content="Archer 2:" Grid.Column="1" Margin="15,175,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbArch2Arr1" Grid.Column="1" Margin="75,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch2Arr2" Grid.Column="1" Margin="150,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch2Arr3" Grid.Column="1" Margin="225,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch2Arr4" Grid.Column="1" Margin="300,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch2Arr5" Grid.Column="1" Margin="375,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch2Arr6" Grid.Column="1" Margin="450,175,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        
+        <Label Content="Archer 3:" Grid.Column="1" Margin="15,250,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbArch3Arr1" Grid.Column="1" Margin="75,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch3Arr2" Grid.Column="1" Margin="150,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch3Arr3" Grid.Column="1" Margin="225,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch3Arr4" Grid.Column="1" Margin="300,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch3Arr5" Grid.Column="1" Margin="375,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch3Arr6" Grid.Column="1" Margin="450,250,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        
+        <Label Content="Archer 4:" Grid.Column="1" Margin="15,325,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbArch4Arr1" Grid.Column="1" Margin="75,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch4Arr2" Grid.Column="1" Margin="150,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch4Arr3" Grid.Column="1" Margin="225,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch4Arr4" Grid.Column="1" Margin="300,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch4Arr5" Grid.Column="1" Margin="375,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="tbArch4Arr6" Grid.Column="1" Margin="450,325,0,0" Height="23" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+
+        <Button x:Name="bnEdit" Grid.Column="1" Content="Edit" Height="23" Width="75" Margin="0,0,110,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnEdit_Click"/>
         <Button x:Name="bnOk" Grid.Column="1" Content="Okay" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnOk_Click"/>
     </Grid>
 </Window>

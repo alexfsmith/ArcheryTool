@@ -11,8 +11,8 @@
         <Button x:Name="bnScoring" Content="Go" Height="23" Width="75" Margin="0,0,40,200" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnScoring_Click"/>
         <Label Content="Get help tuning your bow:" Margin="0,0,120,140" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="bnTuning" Content="Go" Height="23" Width="75" Margin="0,0,40,140" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnTuning_Click"/>
-        <Label Content="View previous scored rounds:" Margin="0,0,120,80" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Button x:Name="bnHistory" Content="Go" Height="23" Width="75" Margin="0,0,40,80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnHistory_Click"/>
+        <Label Content="View previous scored rounds:" Margin="0,0,120,80" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsEnabled="False"/>
+        <Button x:Name="bnHistory" Content="Go" Height="23" Width="75" Margin="0,0,40,80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnHistory_Click" IsEnabled="False"/>
         <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
     </Grid>
 </Window>

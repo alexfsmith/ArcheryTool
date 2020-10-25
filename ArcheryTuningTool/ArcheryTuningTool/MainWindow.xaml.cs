@@ -29,7 +29,7 @@ namespace ArcheryTool
 
         private void BnHistory_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void BnClose_Click(object sender, RoutedEventArgs e)
