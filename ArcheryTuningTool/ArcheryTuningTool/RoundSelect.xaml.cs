@@ -59,6 +59,7 @@ namespace ArcheryTool
             cbNoArchers.Items.Add(3);
             cbNoArchers.Items.Add(4);
             cbNoArchers.SelectedIndex = 0;
+            cbNoArchers.IsEnabled = false;      //until functionality there for multiple
         }
 
         protected void SetupRoundCombo(bool bIndoors)

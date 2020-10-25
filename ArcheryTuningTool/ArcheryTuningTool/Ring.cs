@@ -8,11 +8,11 @@ using System.Windows.Navigation;
 
 namespace ArcheryTool
 {
-    class Ring<T> : IEnumerable<UIElement>, IEnumerator<UIElement> where T:UIElement
+    class Ring<T> : IEnumerable<T>, IEnumerator<T>
     {
-        private int nElements;
-        private int nHead = -1;      //list has no items in it, so head is outside range of nElements
-        private UIElement[] ring;
+        protected int nElements;
+        protected int nHead = -1;      //list has no items in it, so head is outside range of nElements
+        protected T[] ring;
 
         public Ring(int nElements)
         {
@@ -20,12 +20,17 @@ namespace ArcheryTool
             ring = new T[nElements];
         }
 
-        public UIElement Current => ring[nHead];
+        public T Current => ring[nHead];
+
+        public int GetHead()
+        {
+            return nHead;
+        }
 
         public int GetSize()
         {
             int size = 0;
-            for(int i = 0; i < ring.Length; i++)
+            for (int i = 0; i < ring.Length; i++)
             {
                 if (ring[i] != null)
                     size++;
@@ -34,13 +39,13 @@ namespace ArcheryTool
             return size;
         }
 
-        public void Add(UIElement element)
+        public virtual void Add(T element)
         {
             MoveNext();
             ring[nHead] = element;
         }
 
-        public UIElement this[int nIndex]
+        public T this[int nIndex]
         {
             get { return ring[nIndex]; }
         }
@@ -50,10 +55,10 @@ namespace ArcheryTool
 
         public void Dispose()
         {
-        
+
         }
 
-        public IEnumerator<UIElement> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return this;
         }
@@ -61,9 +66,14 @@ namespace ArcheryTool
         public bool MoveNext()
         {
             nHead++;
-            if (nHead >= nElements - 1)      //0 indexed to match array, resets to 0 instead of ticking over to nElements - 1
+            if (nHead > nElements - 1)      //0 indexed to match array, resets to 0 instead of ticking over to nElements - 1
                 nHead = 0;
             return true;
+        }
+
+        public void SetHead(int element)
+        {
+            nHead = element;
         }
 
         public void ResetHead()
@@ -74,7 +84,7 @@ namespace ArcheryTool
         public void Reset()
         {
             ResetHead();
-            ring = new UIElement[nElements];
+            ring = new T[nElements];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -86,6 +96,21 @@ namespace ArcheryTool
         {
             return nElements;
         }
+    }
+
+    class UIRing<T> : Ring<T> where T : UIElement
+    {
+        public UIRing(int nElements) : base(nElements)
+        {
+            this.nElements = nElements;
+            ring = new T[nElements];
+        }
+
+        public override void Add(T element)
+        {
+            MoveNext();
+            ring[nHead] = (T)element;
+        }
 
         public void SetNumElements(int newNElements)
         {
@@ -95,7 +120,7 @@ namespace ArcheryTool
             }
             else
             {
-                UIElement[] temp = new UIElement[nElements];
+                T[] temp = new T[nElements];
                 for(int i = 0; i < nElements; i++)
                 {
                     temp[i] = Current;

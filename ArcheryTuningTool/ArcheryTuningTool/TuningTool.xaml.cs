@@ -25,9 +25,9 @@ namespace ArcheryTool
         private EBowStyle eBowStyle;
         private bool bRightHanded;
         private int nFletched;
-        private Ring<FletchedGraphic> lFletched;
+        private UIRing<FletchedGraphic> lFletched;
         private int nBareshaft;
-        private Ring<BareshaftGraphic> lBareshaft;
+        private UIRing<BareshaftGraphic> lBareshaft;
         private int nPoundage;
         private int nDrawLength;
         private string sSpine;
@@ -42,8 +42,170 @@ namespace ArcheryTool
             InitializeComponent();
             SetupTenZoneTargetGraphics();
             SetupComboBoxes();
-            lFletched = new Ring<FletchedGraphic>(nFletched);
-            lBareshaft = new Ring<BareshaftGraphic>(nBareshaft);
+            lFletched = new UIRing<FletchedGraphic>(nFletched);
+            lBareshaft = new UIRing<BareshaftGraphic>(nBareshaft);
+        }
+
+        
+
+        //Setup for combo boxes to add options
+        protected void SetupComboBoxes()
+        {
+            cbBowStyle.Items.Add("Olympic Recurve");
+            cbBowStyle.Items.Add("Compound");
+            cbBowStyle.Items.Add("Barebow Recurve");
+            cbBowStyle.Items.Add("Longbow");
+            cbBowStyle.Items.Add("Other");
+            cbBowStyle.SelectedIndex = 0;
+
+            cbHands.Items.Add("Right-handed");      //should not be visible for compound? maybe have a shoot-through option?
+            cbHands.Items.Add("Left-handed");
+            cbHands.SelectedIndex = 0;
+
+            cbFletched.Items.Add(3);
+            cbFletched.Items.Add(6);
+            cbFletched.SelectedIndex = 0;
+
+            cbBareshaft.Items.Add(1);
+            cbBareshaft.Items.Add(2);
+            cbBareshaft.SelectedIndex = 0;
+        }
+
+        //Message handlers for controls + canvas
+        private void CbBowStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbBowStyle.SelectedItem)
+            {
+                case "Olympic Recurve":
+                    eBowStyle = EBowStyle.Recurve;
+                    break;
+                case "Compound":
+                    eBowStyle = EBowStyle.Compound;
+                    break;
+                case "Barebow Recurve":
+                    eBowStyle = EBowStyle.Barebow;
+                    break;
+                case "Longbow":
+                    eBowStyle = EBowStyle.Longbow;
+                    break;
+                default:
+                    eBowStyle = EBowStyle.Other;
+                    break;
+            }
+        }
+
+        private void CbHands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbHands.SelectedItem.ToString() == "Right-handed")
+                bRightHanded = true;
+            else
+                bRightHanded = false;
+        }
+
+        private void BnOk_Click(object sender, RoutedEventArgs e)
+        {
+            if (Validate())
+            {
+                nPoundage = int.Parse(tbPoundage.Text);
+                nDrawLength = int.Parse(tbDrawLength.Text);
+                sSpine = tbSpine.Text;
+                dArrowLength = double.Parse(tbArrowLength.Text);
+            }
+            else
+            {
+                MessageBox.Show("Please check input and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private bool Validate()
+        {
+            int outInt;
+            double outDouble;
+
+            if (!int.TryParse(tbPoundage.Text, out outInt)) return false;
+            if (!int.TryParse(tbDrawLength.Text, out outInt)) return false;
+            if (!double.TryParse(tbArrowLength.Text, out outDouble)) return false;
+
+            return true;
+        }
+
+        private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePos = e.GetPosition(target);
+
+            if (Keyboard.Modifiers == ModifierKeys.Control) //bareshaft
+            {
+                BareshaftGraphic bareshaft = new BareshaftGraphic(mousePos);
+                lBareshaft.Add(bareshaft);
+            }
+            else
+            {
+                FletchedGraphic fletched = new FletchedGraphic(mousePos);
+                lFletched.Add(fletched);
+            }
+
+            UpdateTargetChildren();
+        }
+
+        private void UpdateTargetChildren()
+        {
+            target.Children.Clear();
+            AddTargetGraphic();
+
+            if (lBareshaft.GetSize() > 0)
+            {
+                int head = lBareshaft.GetHead();
+                lBareshaft.SetHead(0);
+                for (int i = 0; i < lBareshaft.GetNumElements(); i++)
+                {
+                    BareshaftGraphic bareshaft = (BareshaftGraphic)lBareshaft[i];
+                    if (bareshaft != null)
+                        target.Children.Add(bareshaft);
+                    lBareshaft.MoveNext();
+                }
+                lBareshaft.SetHead(head);
+            }
+
+            if (lFletched.GetSize() > 0)
+            {
+                int head = lFletched.GetHead();
+                lFletched.SetHead(0);
+                for (int i = 0; i < lFletched.GetNumElements(); i++)
+                {
+                    FletchedGraphic fletched = (FletchedGraphic)lFletched[i];
+                    if (fletched != null)
+                        target.Children.Add(fletched);      //ienumerator will go through the whole array even if elements are null
+                    lFletched.MoveNext();
+                }
+                lFletched.SetHead(head);
+            }
+        }
+
+        private void AddTargetGraphic()
+        {
+            foreach (Ellipse ellipse in targetGraphics)
+            {
+                target.Children.Add(ellipse);
+            }
+        }
+
+        private void CbFletched_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFletched.SelectedIndex == 0)
+                nFletched = 3;
+            else
+                nFletched = 6;
+            if (lFletched != null)
+                lFletched.SetNumElements(nFletched);
+        }
+
+        private void CbBareshaft_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (cbBareshaft.SelectedIndex == 0)
+                nBareshaft = 1;
+            else
+                nBareshaft = 2;
+            if (lBareshaft != null)
+                lBareshaft.SetNumElements(nBareshaft);
         }
 
         private void SetupTenZoneTargetGraphics()
@@ -160,7 +322,6 @@ namespace ArcheryTool
             spider.Opacity = 100;
             spider.Stretch = Stretch.UniformToFill;
 
-            AddTargetGraphic();
             targetGraphics.Add(white1);
             targetGraphics.Add(white2);
             targetGraphics.Add(black1);
@@ -172,162 +333,7 @@ namespace ArcheryTool
             targetGraphics.Add(gold1);
             targetGraphics.Add(gold2);
             targetGraphics.Add(spider);
-        }
-
-        //Setup for combo boxes to add options
-        protected void SetupComboBoxes()
-        {
-            cbBowStyle.Items.Add("Olympic Recurve");
-            cbBowStyle.Items.Add("Compound");
-            cbBowStyle.Items.Add("Barebow Recurve");
-            cbBowStyle.Items.Add("Longbow");
-            cbBowStyle.Items.Add("Other");
-            cbBowStyle.SelectedIndex = 0;
-
-            cbHands.Items.Add("Right-handed");      //should not be visible for compound? maybe have a shoot-through option?
-            cbHands.Items.Add("Left-handed");
-            cbHands.SelectedIndex = 0;
-
-            cbFletched.Items.Add(3);
-            cbFletched.Items.Add(6);
-            cbFletched.SelectedIndex = 0;
-
-            cbBareshaft.Items.Add(1);
-            cbBareshaft.Items.Add(2);
-            cbBareshaft.SelectedIndex = 0;
-        }
-
-        //Message handlers for controls + canvas
-        private void CbBowStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch (cbBowStyle.SelectedItem)
-            {
-                case "Olympic Recurve":
-                    eBowStyle = EBowStyle.Recurve;
-                    break;
-                case "Compound":
-                    eBowStyle = EBowStyle.Compound;
-                    break;
-                case "Barebow Recurve":
-                    eBowStyle = EBowStyle.Barebow;
-                    break;
-                case "Longbow":
-                    eBowStyle = EBowStyle.Longbow;
-                    break;
-                default:
-                    eBowStyle = EBowStyle.Other;
-                    break;
-            }
-        }
-
-        private void CbHands_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbHands.SelectedItem.ToString() == "Right-handed")
-                bRightHanded = true;
-            else
-                bRightHanded = false;
-        }
-
-        private void BnOk_Click(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                nPoundage = int.Parse(tbPoundage.Text);
-                nDrawLength = int.Parse(tbDrawLength.Text);
-                sSpine = tbSpine.Text;
-                dArrowLength = double.Parse(tbArrowLength.Text);
-            }
-            else
-            {
-                MessageBox.Show("Please check input and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-        private bool Validate()
-        {
-            int outInt;
-            double outDouble;
-
-            if (!int.TryParse(tbPoundage.Text, out outInt)) return false;
-            if (!int.TryParse(tbDrawLength.Text, out outInt)) return false;
-            if (!double.TryParse(tbArrowLength.Text, out outDouble)) return false;
-
-            return true;
-        }
-
-        private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point mousePos = e.GetPosition(target);
-
-            if (Keyboard.Modifiers == ModifierKeys.Control) //bareshaft
-            {
-                BareshaftGraphic bareshaft = new BareshaftGraphic(mousePos);
-                lBareshaft.Add(bareshaft);
-            }
-            else
-            {
-                FletchedGraphic fletched = new FletchedGraphic(mousePos);
-                lFletched.Add(fletched);
-            }
-
-            UpdateTargetChildren();
-        }
-
-        private void UpdateTargetChildren()
-        {
-            target.Children.Clear();
             AddTargetGraphic();
-
-            if (lBareshaft.GetSize() > 0)
-            {
-                lBareshaft.ResetHead();
-                for (int i = 0; i < lBareshaft.GetNumElements(); i++)
-                {
-                    BareshaftGraphic bareshaft = (BareshaftGraphic)lBareshaft[i];
-                    if (bareshaft != null)
-                        target.Children.Add(bareshaft);
-                    lBareshaft.MoveNext();
-                }
-            }
-
-            if (lFletched.GetSize() > 0)
-            {
-                lFletched.ResetHead();
-                for (int i = 0; i < lFletched.GetNumElements(); i++)
-                {
-                    FletchedGraphic fletched = (FletchedGraphic)lFletched[i];
-                    if (fletched != null)
-                        target.Children.Add(fletched);      //ienumerator will go through the whole array even if elements are null
-                    lFletched.MoveNext();
-                }
-            }
-        }
-
-        private void AddTargetGraphic()
-        {
-            foreach (Ellipse ellipse in targetGraphics)
-            {
-                target.Children.Add(ellipse);
-            }
-        }
-
-        private void CbFletched_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbFletched.SelectedIndex == 0)
-                nFletched = 3;
-            else
-                nFletched = 6;
-            if (lFletched != null)
-                lFletched.SetNumElements(nFletched);
-        }
-
-        private void CbBareshaft_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            if (cbBareshaft.SelectedIndex == 0)
-                nBareshaft = 1;
-            else
-                nBareshaft = 2;
-            if (lBareshaft != null)
-                lBareshaft.SetNumElements(nBareshaft);
         }
     }
 }

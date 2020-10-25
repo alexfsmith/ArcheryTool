@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Archer.cs" />
     <Compile Include="Ring.cs" />
     <Compile Include="RoundSelect.xaml.cs">
       <DependentUpon>RoundSelect.xaml</DependentUpon>
