@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArcheryTuningTool;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -24,6 +25,8 @@ namespace ArcheryTool
         private Archer archer;
         private Ring<int> tempScore;
         private List<int> endScore;
+        private int nEnd;
+        private int nTotalEnds;
 
         public ScoreEntry(ERound round, EBowStyle bowStyle, int archers, bool sighters, RoundSelect rs)
         {
@@ -35,9 +38,20 @@ namespace ArcheryTool
             nArchers = archers;
             bSighters = sighters;
             if (round == ERound.Fita18 || round == ERound.Portsmouth)
+            {
                 nArrows = 3;
+                nTotalEnds = 20;
+            }
             else
+            {
                 nArrows = 6;
+                if (round == ERound.WA1440)
+                    nTotalEnds = 24;
+                else
+                    nTotalEnds = 12;
+            }
+            nEnd = 1;
+            labelEnd.Content = "End " + nEnd + " of " + nTotalEnds;
             lArrows = new UIRing<FletchedGraphic>(nArrows);
 
             if (nArchers == 1)
@@ -53,7 +67,8 @@ namespace ArcheryTool
         
         private bool Validate()
         {
-            return false;
+            //TODO
+            return true;
         }
 
         private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -135,6 +150,8 @@ namespace ArcheryTool
 
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
+            if (!Validate())
+                return;
             endScore.Clear();
             //take account of edits
 
@@ -162,7 +179,19 @@ namespace ArcheryTool
                     archer.AddTen();
             }
 
-            MessageBox.Show("Total Score: " + archer.GetScore() + " Total Hits: " + archer.GetHits() + " Total Tens: " + archer.GetTens());
+            archer.FinishEnd();
+
+            if (nEnd < nTotalEnds)
+            {
+                nEnd++;
+                labelEnd.Content = "End " + nEnd + " of " + nTotalEnds;
+            }
+            else
+            {
+                this.Visibility = Visibility.Hidden;
+                ScoreSheet scoreSheet = new ScoreSheet(archer.GetData(), this);
+                scoreSheet.ShowDialog();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

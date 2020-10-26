@@ -1,0 +1,15 @@
+﻿<Window x:Class="ArcheryTuningTool.ScoreSheet"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArcheryTuningTool"
+        mc:Ignorable="d"
+        Title="ScoreSheet" Height="360" Width="700" Closing="Window_Closing">
+    <Grid>
+        <Label x:Name="lbScoreSummary" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+        <DataGrid x:Name="gridScore" Height="200" Width="560" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Top" AlternatingRowBackground="LightGray" CanUserDeleteRows="False" CanUserAddRows="False" MinRowHeight="20" IsReadOnly="True" MinHeight="100" MinWidth="280" AutoGenerateColumns="False" ItemsSource="{Binding}"/>
+        <Button x:Name="bnSave" Content="Save" Height="23" Width="75" Margin="0,0,110,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnSave_Click"/>
+        <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
+    </Grid>
+</Window>

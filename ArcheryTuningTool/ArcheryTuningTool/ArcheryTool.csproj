@@ -63,6 +63,9 @@
     <Compile Include="ScoreEntry.xaml.cs">
       <DependentUpon>ScoreEntry.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScoreSheet.xaml.cs">
+      <DependentUpon>ScoreSheet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TuningTool.xaml.cs">
       <DependentUpon>TuningTool.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ScoreEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScoreSheet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
