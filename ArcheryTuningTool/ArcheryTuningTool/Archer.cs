@@ -33,7 +33,25 @@ namespace ArcheryTool
         {
             for (int i = 0; i < 18; i++)
             {
-                table.Columns.Add(new DataColumn("", System.Type.GetType("System.Int32")));
+                if (i < 14)
+                {
+                    string s = " ";
+                    for(int j = 0; j < i; j++)
+                    {
+                        s += " ";
+                    }
+
+                    table.Columns.Add(new DataColumn(s, Type.GetType("System.Int32")));
+                }
+                if (i == 14)
+                    table.Columns.Add(new DataColumn("Dozen", Type.GetType("System.Int32")));
+                if(i == 15)
+                    table.Columns.Add(new DataColumn("Hits", Type.GetType("System.Int32")));
+                if(i == 16)
+                    table.Columns.Add(new DataColumn("Tens", Type.GetType("System.Int32")));
+                if(i == 17)
+                    table.Columns.Add(new DataColumn("Total", Type.GetType("System.Int32")));
+                
             }
             currentRow = table.NewRow();
         }
@@ -64,6 +82,7 @@ namespace ArcheryTool
                 dataRow[col] = nTens;
                 col++;
                 dataRow[col] = nScore;
+                table.Rows.Add(dataRow);
                 currentRow = table.NewRow();
                 col = 0;
                 row++;

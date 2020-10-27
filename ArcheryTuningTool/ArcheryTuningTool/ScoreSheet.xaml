@@ -8,7 +8,7 @@
         Title="ScoreSheet" Height="360" Width="700" Closing="Window_Closing">
     <Grid>
         <Label x:Name="lbScoreSummary" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-        <DataGrid x:Name="gridScore" Height="200" Width="560" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Top" AlternatingRowBackground="LightGray" CanUserDeleteRows="False" CanUserAddRows="False" MinRowHeight="20" IsReadOnly="True" MinHeight="100" MinWidth="280" AutoGenerateColumns="False" ItemsSource="{Binding}"/>
+        <DataGrid x:Name="gridScore" Height="200" Width="560" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Top" AlternatingRowBackground="LightGray" CanUserDeleteRows="False" CanUserAddRows="False" MinRowHeight="20" IsReadOnly="True" MinHeight="100" MinWidth="280" AutoGenerateColumns="False"/>
         <Button x:Name="bnSave" Content="Save" Height="23" Width="75" Margin="0,0,110,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnSave_Click"/>
         <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
     </Grid>
