@@ -21,138 +21,114 @@ namespace ArcheryTuningTool
     /// </summary>
     public partial class ScoreSheet : Window
     {
-        private DataTable data;
+        private string[,] data;
         private ScoreEntry se;
-        private List<ScoreSheetRow> scoreSheetRows;
 
-        public ScoreSheet(DataTable data, ScoreEntry se)
+        public ScoreSheet(string[,] data, ScoreEntry se)
         {
             InitializeComponent();
             this.data = data;
             this.se = se;
 
-            scoreSheetRows = new List<ScoreSheetRow>();
-            scoreSheetRows.Add(new ScoreSheetRow(data.Rows[0]));
-            scoreSheetRows.Add(new ScoreSheetRow(data.Rows[1]));
-            scoreSheetRows.Add(new ScoreSheetRow(data.Rows[2]));
-            scoreSheetRows.Add(new ScoreSheetRow(data.Rows[3]));
-            scoreSheetRows.Add(new ScoreSheetRow(data.Rows[4]));
-
-            SetupGrid(); 
-
+            FillGrid();
         }
 
-        private void SetupGrid()
+        private void FillGrid()
         {
-            if (data != null) 
-            {
-                gridScore.DataContext = data;
+            score1_1.Content = data[0, 0];
+            score1_2.Content = data[1, 0];
+            score1_3.Content = data[2, 0];
+            score1_4.Content = data[3, 0];
+            score1_5.Content = data[4, 0];
+            score1_6.Content = data[5, 0];
+            score1_7.Content = data[6, 0];
+            score1_8.Content = data[7, 0];
+            score1_9.Content = data[8, 0];
+            score1_10.Content = data[9, 0];
+            score1_11.Content = data[10, 0];
+            score1_12.Content = data[11, 0];
+            score1_13.Content = data[12, 0];
+            score1_14.Content = data[13, 0];
+            dozen1.Content = data[14, 0];
+            hits1.Content = data[15, 0];
+            tens1.Content = data[16, 0];
+            total1.Content = data[17, 0];
 
-                int count = 0;
-                foreach (DataColumn col in data.Columns)
-                {
-                    if (count < 14)
-                    {
-                        gridScore.Columns.Add(
-                            new DataGridTextColumn
-                            {
-                                Header = col.ColumnName,
-                                //Binding = new Binding(string.Format("[{0}]", col.ColumnName)),           //TODO: make this display the datam give it column names
-                                Width = 28
-                            });
-                    }
-                    else if(count == 14)
-                    {
-                        gridScore.Columns.Add(
-                            new DataGridTextColumn
-                            {
-                                Header = col.ColumnName,
-                                //Binding = new Binding(string.Format("[{0}]", col.ColumnName)),
-                                Width = 50
-                            });
-                    }
-                    else
-                    {
-                        gridScore.Columns.Add(
-                            new DataGridTextColumn
-                            {
-                                Header = col.ColumnName,
-                                //Binding = new Binding(string.Format("[{0}]", col.ColumnName)),
-                                Width = 40
-                            });
-                    }
-                    count++;
-                }
+            score2_1.Content = data[0, 1];
+            score2_2.Content = data[1, 1];
+            score2_3.Content = data[2, 1];
+            score2_4.Content = data[3, 1];
+            score2_5.Content = data[4, 1];
+            score2_6.Content = data[5, 1];
+            score2_7.Content = data[6, 1];
+            score2_8.Content = data[7, 1];
+            score2_9.Content = data[8, 1];
+            score2_10.Content = data[9, 1];
+            score2_11.Content = data[10, 1];
+            score2_12.Content = data[11, 1];
+            score2_13.Content = data[12, 1];
+            score2_14.Content = data[13, 1];
+            dozen2.Content = data[14, 1];
+            hits2.Content = data[15, 1];
+            tens2.Content = data[16, 1];
+            total2.Content = data[17, 1];
 
-                gridScore.ItemsSource = scoreSheetRows;
+            score3_1.Content = data[0, 2];
+            score3_2.Content = data[1, 2];
+            score3_3.Content = data[2, 2];
+            score3_4.Content = data[3, 2];
+            score3_5.Content = data[4, 2];
+            score3_6.Content = data[5, 2];
+            score3_7.Content = data[6, 2];
+            score3_8.Content = data[7, 2];
+            score3_9.Content = data[8, 2];
+            score3_10.Content = data[9, 2];
+            score3_11.Content = data[10, 2];
+            score3_12.Content = data[11, 2];
+            score3_13.Content = data[12, 2];
+            score3_14.Content = data[13, 2];
+            dozen3.Content = data[14, 2];
+            hits3.Content = data[15, 2];
+            tens3.Content = data[16, 2];
+            total3.Content = data[17, 2];
 
-                /*
-                for(int i = 0; i < 5; i++)
-                {
-                    //DataGridRow row;
-                    gridScore.Items.Add(data.Rows[i]);
+            score4_1.Content = data[0, 3];
+            score4_2.Content = data[1, 3];
+            score4_3.Content = data[2, 3];
+            score4_4.Content = data[3, 3];
+            score4_5.Content = data[4, 3];
+            score4_6.Content = data[5, 3];
+            score4_7.Content = data[6, 3];
+            score4_8.Content = data[7, 3];
+            score4_9.Content = data[8, 3];
+            score4_10.Content = data[9, 3];
+            score4_11.Content = data[10, 3];
+            score4_12.Content = data[11, 3];
+            score4_13.Content = data[12, 3];
+            score4_14.Content = data[13, 3];
+            dozen4.Content = data[14, 3];
+            hits4.Content = data[15, 3];
+            tens4.Content = data[16, 3];
+            total4.Content = data[17, 3];
 
-                    //row["Column1"] = data.Rows[i][0];
-                    //row["Column2"] = data.Rows[i][1];
-                    //row["Column3"] = data.Rows[i][2];
-                    //row["Column4"] = data.Rows[i][3];
-                    //row["Column5"] = data.Rows[i][4];
-                    //row["Column6"] = data.Rows[i][5];
-                    //row["Column7"] = data.Rows[i][6];
-                    //row["Column8"] = data.Rows[i][7];
-                    //row["Column9"] = data.Rows[i][8];
-                    //row["Column10"] = data.Rows[i][9];
-                    //row["Column11"] = data.Rows[i][10];
-                    //row["Column12"] = data.Rows[i][11];
-                    //row["Column13"] = data.Rows[i][12];
-                    //row["Dozen"] = data.Rows[i][13];
-                    //row["Hits"] = data.Rows[i][14];
-                    //row["Tens"] = data.Rows[i][15];
-                    //row["Total"] = data.Rows[i][16];
-
-                    //data.Rows.Add(row);
-                }*/
-
-                /*Binding binding = new Binding();
-
-                binding.Source = data;
-                gridScore.SetBinding(DataGrid.ItemsSourceProperty, binding);
-
-                for (int i = 0; i < 5; i++)
-                {
-                    gridScore.Items.Add(new DataRow());
-
-                }*/
-
-            }
-
-
-            /*for (int i = 0; i < nCols; i++)
-            {
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-
-                if (i == 14)
-                {
-                    textColumn.Header = "Hits";
-                    textColumn.Binding = new Binding("Hits");
-                }
-                if (i == 15)
-                {
-                    textColumn.Header = "Tens";
-                    textColumn.Binding = new Binding("Tens");
-                }
-                if (i == 16)
-                {
-                    textColumn.Header = "Total";
-                    textColumn.Binding = new Binding("Total");
-                }
-                
-                gridScore.Columns.Add(textColumn);
-            }*/
-        }
-
-        private void CreateRows()
-        {
+            score5_1.Content = data[0, 4];
+            score5_2.Content = data[1, 4];
+            score5_3.Content = data[2, 4];
+            score5_4.Content = data[3, 4];
+            score5_5.Content = data[4, 4];
+            score5_6.Content = data[5, 4];
+            score5_7.Content = data[6, 4];
+            score5_8.Content = data[7, 4];
+            score5_9.Content = data[8, 4];
+            score5_10.Content = data[9, 4];
+            score5_11.Content = data[10, 4];
+            score5_12.Content = data[11, 4];
+            score5_13.Content = data[12, 4];
+            score5_14.Content = data[13, 4];
+            dozen5.Content = data[14, 4];
+            hits5.Content = data[15, 4];
+            tens5.Content = data[16, 4];
+            total5.Content = data[17, 4];
 
         }
 
@@ -171,56 +147,4 @@ namespace ArcheryTuningTool
             se.Close();
         }
     }
-
-    public class ScoreSheetRow
-    {
-        private object[] row;
-        private int arr1;
-        private int arr2;
-        private int arr3;
-        private int arr4;
-        private int arr5;
-        private int arr6;
-        private int sub1;
-        private int arr7;
-        private int arr8;
-        private int arr9;
-        private int arr10;
-        private int arr11;
-        private int arr12;
-        private int sub2;
-        private int dozen;
-        private int hits;
-        private int tens;
-        private int total;
-
-        public ScoreSheetRow(DataRow row)
-        {
-            this.row = row.ItemArray;
-            Setup();
-        }
-
-        private void Setup()
-        {
-            arr1 = (int)row[0];
-            arr2 = (int)row[1];
-            arr3 = (int)row[2];
-            arr4 = (int)row[3];
-            arr5 = (int)row[4];
-            arr6 = (int)row[5];
-            sub1 = (int)row[6];
-            arr7 = (int)row[7];
-            arr8 = (int)row[8];
-            arr9 = (int)row[9];
-            arr10 = (int)row[10];
-            arr11 = (int)row[11];
-            arr12 = (int)row[12];
-            sub2 = (int)row[13];
-            dozen = (int)row[14];
-            hits = (int)row[15];
-            tens = (int)row[16];
-            total = (int)row[17];
-        }
-    }
-
 }

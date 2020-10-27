@@ -8,8 +8,164 @@
         Title="ScoreSheet" Height="360" Width="700" Closing="Window_Closing">
     <Grid>
         <Label x:Name="lbScoreSummary" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-        <DataGrid x:Name="gridScore" Height="200" Width="560" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Top" AlternatingRowBackground="LightGray" CanUserDeleteRows="False" CanUserAddRows="False" MinRowHeight="20" IsReadOnly="True" MinHeight="100" MinWidth="280" AutoGenerateColumns="False"/>
+        <Grid Margin="38,30,38,0" Width="615" HorizontalAlignment="Center" VerticalAlignment="Top" ShowGridLines="False" Height="240" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Dozen" Grid.Column="14" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Hits" Grid.Column="15" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Tens" Grid.Column="16" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Total" Grid.Column="17" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label x:Name="score1_1" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_2" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_3" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_4" Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_5" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_6" Grid.Column="5" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_7" Grid.Column="6" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_8" Grid.Column="7" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_9" Grid.Column="8" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_10" Grid.Column="9" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_11" Grid.Column="10" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_12" Grid.Column="11" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_13" Grid.Column="12" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score1_14" Grid.Column="13" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="dozen1" Grid.Column="14" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="hits1" Grid.Column="15" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="tens1" Grid.Column="16" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total1" Grid.Column="17" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label x:Name="score2_1" Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_2" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_3" Grid.Column="2" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_4" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_5" Grid.Column="4" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_6" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_7" Grid.Column="6" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_8" Grid.Column="7" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_9" Grid.Column="8" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_10" Grid.Column="9" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_11" Grid.Column="10" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_12" Grid.Column="11" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_13" Grid.Column="12" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score2_14" Grid.Column="13" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="dozen2" Grid.Column="14" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="hits2" Grid.Column="15" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="tens2" Grid.Column="16" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total2" Grid.Column="17" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            
+            <Label x:Name="score3_1" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_2" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_3" Grid.Column="2" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_4" Grid.Column="3" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_5" Grid.Column="4" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_6" Grid.Column="5" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_7" Grid.Column="6" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_8" Grid.Column="7" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_9" Grid.Column="8" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_10" Grid.Column="9" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_11" Grid.Column="10" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_12" Grid.Column="11" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_13" Grid.Column="12" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score3_14" Grid.Column="13" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="dozen3" Grid.Column="14" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="hits3" Grid.Column="15" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="tens3" Grid.Column="16" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total3" Grid.Column="17" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            
+            <Label x:Name="score4_1" Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_2" Grid.Column="1" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_3" Grid.Column="2" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_4" Grid.Column="3" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_5" Grid.Column="4" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_6" Grid.Column="5" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_7" Grid.Column="6" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_8" Grid.Column="7" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_9" Grid.Column="8" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_10" Grid.Column="9" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_11" Grid.Column="10" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_12" Grid.Column="11" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_13" Grid.Column="12" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score4_14" Grid.Column="13" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="dozen4" Grid.Column="14" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="hits4" Grid.Column="15" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="tens4" Grid.Column="16" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total4" Grid.Column="17" Grid.Row="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label x:Name="score5_1" Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_2" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_3" Grid.Column="2" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_4" Grid.Column="3" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_5" Grid.Column="4" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_6" Grid.Column="5" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_7" Grid.Column="6" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_8" Grid.Column="7" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_9" Grid.Column="8" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_10" Grid.Column="9" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_11" Grid.Column="10" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_12" Grid.Column="11" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_13" Grid.Column="12" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="score5_14" Grid.Column="13" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="dozen5" Grid.Column="14" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="hits5" Grid.Column="15" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="tens5" Grid.Column="16" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total5" Grid.Column="17" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,230,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,190,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,150,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,110,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="38,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="68,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="98,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="128,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="158,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="188,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="218,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="248,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="278,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="308,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="338,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="368,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="398,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="428,70,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="60" Margin="458,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="518,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="563,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="608,30,0,0"/>
+
         <Button x:Name="bnSave" Content="Save" Height="23" Width="75" Margin="0,0,110,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnSave_Click"/>
         <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>
+
     </Grid>
 </Window>

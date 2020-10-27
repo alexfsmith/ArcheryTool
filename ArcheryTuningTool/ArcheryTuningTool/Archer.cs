@@ -13,10 +13,10 @@ namespace ArcheryTool
         private int nScore;
         private int nHits;
         private int nTens;
-        private DataTable table;
-        private Tuple<int, int> currentCell;
+        private string[,] table;
         private int nEnd;
-        private DataRow currentRow;
+        private int nCol;
+        private int nRow;
 
         public Archer()
         {
@@ -24,82 +24,47 @@ namespace ArcheryTool
             nScore = 0;
             nHits = 0;
             nTens = 0;
-            table = new DataTable();
-            currentCell = new Tuple<int, int>(0, 0);
-            SetupTable();
+            table = new string[18,5];
+            nCol = 0;
+            nRow = 0;
         }
 
-        private void SetupTable()
-        {
-            for (int i = 0; i < 18; i++)
-            {
-                if (i < 14)
-                {
-                    string s = " ";
-                    for(int j = 0; j < i; j++)
-                    {
-                        s += " ";
-                    }
-
-                    table.Columns.Add(new DataColumn(s, Type.GetType("System.Int32")));
-                }
-                if (i == 14)
-                    table.Columns.Add(new DataColumn("Dozen", Type.GetType("System.Int32")));
-                if(i == 15)
-                    table.Columns.Add(new DataColumn("Hits", Type.GetType("System.Int32")));
-                if(i == 16)
-                    table.Columns.Add(new DataColumn("Tens", Type.GetType("System.Int32")));
-                if(i == 17)
-                    table.Columns.Add(new DataColumn("Total", Type.GetType("System.Int32")));
-                
-            }
-            currentRow = table.NewRow();
-        }
-        
-        public DataTable GetData()
+        public String[,] GetTable()
         {
             return table;
         }
-
+        
         public void FinishEnd()
         {
-            int col = currentCell.Item1;
-            int row = currentCell.Item2;
-            DataRow dataRow = currentRow;
-
             if (nEnd % 2 == 0)        //every second end add a half dozen score, every fourth add a half dozen score, dozen score, hits, tens, total
             {
-                dataRow[col] = (int)dataRow[col - 6] + (int)dataRow[col - 5] + (int)dataRow[col - 4] + (int)dataRow[col - 3] + (int)dataRow[col - 2] + (int)dataRow[col - 1];
-                col++;
+                int subtotal = int.Parse(table[nCol - 1, nRow]) + int.Parse(table[nCol - 2, nRow]) + int.Parse(table[nCol - 3, nRow]) + int.Parse(table[nCol - 4, nRow]) + int.Parse(table[nCol - 5, nRow]) + int.Parse(table[nCol - 6, nRow]);
+                table[nCol, nRow] = subtotal.ToString();
+                nCol++;
             }
 
             if(nEnd % 4 == 0)
             {
-                dataRow[col] = (int)dataRow[6] + (int)dataRow[13];
-                col++;
-                dataRow[col] = nHits;
-                col++;
-                dataRow[col] = nTens;
-                col++;
-                dataRow[col] = nScore;
-                table.Rows.Add(dataRow);
-                currentRow = table.NewRow();
-                col = 0;
-                row++;
+                int dozen = int.Parse(table[6, nRow]) + int.Parse(table[13, nRow]);
+                table[nCol, nRow] = dozen.ToString();
+                nCol++;
+                table[nCol, nRow] = nHits.ToString();                                   //TODO: change to hits, tens per dozen with separate total at bottom
+                nCol++;
+                table[nCol, nRow] = nTens.ToString();
+                nCol++;
+                table[nCol, nRow] = nScore.ToString();
+                nCol = 0;
+                nRow++;
             }
 
-            currentCell = new Tuple<int, int>(col, row);
             nEnd++;
         }
 
         public void AddToScore(int arrowScore)
         {
-            int col = currentCell.Item1;
-            int row = currentCell.Item2;
-            DataRow dataRow = currentRow;
-            dataRow[col] = arrowScore;
-            currentCell = new Tuple<int, int>(col + 1, row);
+            table[nCol, nRow] = arrowScore.ToString();
             nScore += arrowScore;
+            nCol++;
         }
 
         public void AddHit()

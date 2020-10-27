@@ -189,7 +189,7 @@ namespace ArcheryTool
             else
             {
                 this.Visibility = Visibility.Hidden;
-                ScoreSheet scoreSheet = new ScoreSheet(archer.GetData(), this);
+                ScoreSheet scoreSheet = new ScoreSheet(archer.GetTable(), this);
                 scoreSheet.ShowDialog();
             }
         }
