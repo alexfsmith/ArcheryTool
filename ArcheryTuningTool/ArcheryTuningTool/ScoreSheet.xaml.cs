@@ -5,11 +5,13 @@ namespace ArcheryTuningTool
 {
     /// <summary>
     /// Interaction logic for ScoreSheet.xaml
+    /// Draws completed scoresheet to summarise an archer's round
     /// </summary>
     public partial class ScoreSheet : Window
     {
-        private string[,] data;
         private ScoreEntry se;
+
+        private string[,] data;
         private int totHits;
         private int totTens;
 
@@ -39,6 +41,7 @@ namespace ArcheryTuningTool
             }
         }
 
+        //Populates scoresheet grid with archer's scores from the round
         private void FillGrid()                 //TODO: Finish work in main branch for using a DataTable/DataGrid so other round formats can be used
         {
             score1_1.Content = data[0, 0];

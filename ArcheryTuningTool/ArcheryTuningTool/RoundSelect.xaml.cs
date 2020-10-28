@@ -5,6 +5,7 @@ namespace ArcheryTool
 {
     /// <summary>
     /// Interaction logic for RoundSelect.xaml
+    /// Window to choose format of score entry and scoresheet
     /// </summary>
     public partial class RoundSelect : Window
     {
@@ -28,7 +29,6 @@ namespace ArcheryTool
         private EBowStyle eBowStyle;
         private ERound eRound;
         private int nArchers;
-        private bool bSighters;
         private MainWindow mw;
 
         public RoundSelect(MainWindow mw)
@@ -42,7 +42,7 @@ namespace ArcheryTool
         protected void SetupComboBoxes()
         {
             cbBowStyle.Items.Add("Olympic Recurve");
-            cbBowStyle.Items.Add("Compound");
+            //cbBowStyle.Items.Add("Compound");     //until scoring for 5-zone is ready
             cbBowStyle.Items.Add("Barebow Recurve");
             cbBowStyle.Items.Add("Longbow");
             cbBowStyle.Items.Add("Other");

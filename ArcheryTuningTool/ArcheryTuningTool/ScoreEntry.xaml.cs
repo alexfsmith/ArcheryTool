@@ -10,17 +10,19 @@ using static ArcheryTool.RoundSelect;
 namespace ArcheryTool
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ScoreEntry.xaml
+    /// Window for user to log each end of arrow scores/positions
     /// </summary>
     public partial class ScoreEntry : Window
     {
+        private List<Ellipse> targetGraphics;
+        private UIRing<FletchedGraphic> lArrows;
+        private RoundSelect rs;
+
         private ERound eRound;
         private EBowStyle eBowStyle;
         private int nArchers;
-        private RoundSelect rs;
-        private List<Ellipse> targetGraphics;
         private int nArrows;
-        private UIRing<FletchedGraphic> lArrows;
         private Archer archer;
         private Ring<int> tempScore;
         private List<int> endScore;
@@ -63,6 +65,7 @@ namespace ArcheryTool
             SetupScoreEntryBoxes();
         }    
 
+        //Calculate which ring the arrow is inside
         private int GetScore(Point point)
         {
             int[] radii = new int[10];
@@ -100,6 +103,7 @@ namespace ArcheryTool
             UpdateTargetChildren();
         }
 
+        //Check scores entered are not illegal (eg score > 10, letters)
         private bool Validate()
         {
             List<String> toCheck = new List<string>();                  //TODO: Generalise for multiple archers/different nArrows
@@ -131,6 +135,7 @@ namespace ArcheryTool
         }
 
         //Handlers
+        //Displays scores as entered on canvas, ready for edits if necessary
         private void BnNextArcher_Click(object sender, RoutedEventArgs e)
         {
             if (nArchers == 1)
@@ -166,6 +171,7 @@ namespace ArcheryTool
             tbArch1Arr3.IsEnabled = true;
         }
 
+        //Checks arrow scores and stores them, shows the completed score sheet when round is over
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
             if (Validate())
@@ -232,6 +238,7 @@ namespace ArcheryTool
         }
 
         //Control setup
+        //Hides/Shows score entry textboxes based on number of arrows for round
         private void SetupScoreEntryBoxes()
         {
             if(eRound == ERound.Fita18 || eRound == ERound.Portsmouth)
@@ -284,6 +291,7 @@ namespace ArcheryTool
             }
         }
 
+        //Resets content of score entry textboxes to show score entered
         private void EmptyScoreEntry()
         {
             tbArch1Arr1.Text = "";
@@ -352,6 +360,7 @@ namespace ArcheryTool
                 SetupTenZoneGraphics();
         }
 
+        //Draw circles for a standard 5-zone target face
         private void SetupFiveZoneGraphics()
         {
             targetGraphics = new List<Ellipse>();
@@ -423,6 +432,7 @@ namespace ArcheryTool
             AddTargetGraphic();
         }
 
+        //Draw circles for a standard 10-zone target face
         private void SetupTenZoneGraphics()
         {
             targetGraphics = new List<Ellipse>();

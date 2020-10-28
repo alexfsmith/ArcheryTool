@@ -4,6 +4,11 @@ using System.Windows;
 
 namespace ArcheryTool
 {
+    /// <summary>
+    /// Creates a ring structure of an arbitrary type
+    /// </summary>
+    /// <typeparam name="T">The element type of the ring</typeparam>
+
     class Ring<T> : IEnumerable<T>, IEnumerator<T>
     {
         protected int nSize;
@@ -95,6 +100,10 @@ namespace ArcheryTool
         }       
     }
 
+    /// <summary>
+    /// Creates a ring structure of an arbitrary UIElement
+    /// </summary>
+    /// <typeparam name="T">The element type of the ring which must be a UIElement</typeparam>
     class UIRing<T> : Ring<T> where T : UIElement
     {
         public UIRing(int nSize) : base(nSize)

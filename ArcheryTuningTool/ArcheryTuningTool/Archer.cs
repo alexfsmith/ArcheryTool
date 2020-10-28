@@ -2,6 +2,10 @@
 
 namespace ArcheryTool
 {
+    /// <summary>
+    /// Represents 1 archer shooting a round
+    /// Stores all information needed to populate the score sheet
+    /// </summary>
     public class Archer
     {
         private int nScore;
@@ -26,7 +30,8 @@ namespace ArcheryTool
             nCol = 0;
             nRow = 0;
         }
-                
+        
+        //Adds summary statistics after each (half) dozen
         public void FinishEnd()
         {
             if (nEnd % 2 == 0)        //every second end add a half dozen subtotal
@@ -55,6 +60,7 @@ namespace ArcheryTool
             nEnd++;
         }
 
+        //Adds individual arrow values
         public void AddToScore(int arrowScore)
         {
             table[nCol, nRow] = arrowScore.ToString();

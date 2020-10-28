@@ -22,12 +22,13 @@ namespace ArcheryTool
         };
 
         private List<Ellipse> targetGraphics;
+        private UIRing<BareshaftGraphic> lBareshaft;
+        private UIRing<FletchedGraphic> lFletched;
+        
         private EBowStyle eBowStyle;
         private bool bRightHanded;
         private int nFletched;
-        private UIRing<FletchedGraphic> lFletched;
         private int nBareshaft;
-        private UIRing<BareshaftGraphic> lBareshaft;
         private int nPoundage;
         private int nDrawLength;
         private string sSpine;
@@ -45,8 +46,6 @@ namespace ArcheryTool
             lFletched = new UIRing<FletchedGraphic>(nFletched);
             lBareshaft = new UIRing<BareshaftGraphic>(nBareshaft);
         }
-
-        
 
         //Setup for combo boxes to add options
         protected void SetupComboBoxes()
@@ -210,6 +209,7 @@ namespace ArcheryTool
             }
         }
 
+        //Draws graphics for a standard 10-zone target
         private void SetupTenZoneTargetGraphics()
         {
             targetGraphics = new List<Ellipse>();
