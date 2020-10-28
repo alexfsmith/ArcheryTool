@@ -17,7 +17,6 @@ namespace ArcheryTool
         private ERound eRound;
         private EBowStyle eBowStyle;
         private int nArchers;
-        private bool bSighters;
         private RoundSelect rs;
         private List<Ellipse> targetGraphics;
         private int nArrows;
@@ -27,8 +26,9 @@ namespace ArcheryTool
         private List<int> endScore;
         private int nEnd;
         private int nTotalEnds;
+        private string[] validScores = { "M", "m", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };        //TODO: Add X for 10, and 11 for relevant imperial rounds
 
-        public ScoreEntry(ERound round, EBowStyle bowStyle, int archers, bool sighters, RoundSelect rs)
+        public ScoreEntry(ERound round, EBowStyle bowStyle, int archers, RoundSelect rs)
         {
             InitializeComponent();
 
@@ -36,7 +36,6 @@ namespace ArcheryTool
             eRound = round;
             eBowStyle = bowStyle;
             nArchers = archers;
-            bSighters = sighters;
             if (round == ERound.Fita18 || round == ERound.Portsmouth)
             {
                 nArrows = 3;
@@ -62,25 +61,7 @@ namespace ArcheryTool
 
             SetupTargetGraphics();
             SetupScoreEntryBoxes();
-        }
-
-        
-        private bool Validate()
-        {
-            //TODO
-            return true;
-        }
-
-        private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Point mousePos = e.GetPosition(target);
-            FletchedGraphic arrow = new FletchedGraphic(mousePos);
-            lArrows.Add(arrow);
-
-            tempScore.Add(GetScore(mousePos));
-
-            UpdateTargetChildren();
-        }
+        }    
 
         private int GetScore(Point point)
         {
@@ -99,7 +80,7 @@ namespace ArcheryTool
 
             Point centre = new Point(210, 210);
 
-            for (int i =0; i< radii.Length; i++)
+            for (int i = 0; i < radii.Length; i++)
             {
                 double xdiff = point.X - centre.X;
                 double ydiff = point.Y - centre.Y;
@@ -113,19 +94,56 @@ namespace ArcheryTool
             return 0;       //miss
         }
 
+        private void ClearArrowsFromTarget()
+        {
+            lArrows.Reset();
+            UpdateTargetChildren();
+        }
+
+        private bool Validate()
+        {
+            List<String> toCheck = new List<string>();                  //TODO: Generalise for multiple archers/different nArrows
+            toCheck.Add(tbArch1Arr1.Text);
+            toCheck.Add(tbArch1Arr2.Text);
+            toCheck.Add(tbArch1Arr3.Text);
+
+            bool bValid = false;
+            foreach (string check in toCheck)
+            {
+                foreach (string s in validScores)
+                {
+                    if (check == s)
+                    {
+                        bValid = true;
+                        break;
+                    }
+                }
+
+                if (!bValid)
+                {
+                    MessageBox.Show("Invalid score. Valid scores are M, m, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10", "Invalid Score", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+                bValid = false;
+            }
+
+            return true;
+        }
+
+        //Handlers
         private void BnNextArcher_Click(object sender, RoutedEventArgs e)
         {
-            if(nArchers==1)
+            if (nArchers == 1)
             {
                 endScore = new List<int>(nArrows);
-                for(int i=0; i < tempScore.GetNumElements(); i++)
+                for (int i = 0; i < tempScore.GetSize(); i++)
                 {
                     endScore.Add(tempScore.Current);
                     tempScore.MoveNext();
                 }
                 endScore.Sort();
 
-                if (endScore[0] == 0)                                    //TODO: generalise
+                if (endScore[0] == 0)                                    //TODO: generalise for number of arrows and archers
                     tbArch1Arr1.Text = "M";
                 else
                     tbArch1Arr1.Text = endScore[0].ToString();
@@ -150,48 +168,62 @@ namespace ArcheryTool
 
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validate())
-                return;
-            endScore.Clear();
-            //take account of edits
-
-            if (tbArch1Arr1.Text == "M")
-                endScore.Add(0);
-            if (tbArch1Arr2.Text == "M")
-                endScore.Add(0);
-            if (tbArch1Arr3.Text == "M")
-                endScore.Add(0);
-
-            int arrow;
-            if(int.TryParse(tbArch1Arr1.Text, out arrow))
-                endScore.Add(arrow);
-            if (int.TryParse(tbArch1Arr2.Text, out arrow))
-                endScore.Add(arrow);
-            if (int.TryParse(tbArch1Arr3.Text, out arrow))
-                endScore.Add(arrow);
-
-            foreach(int score in endScore)
+            if (Validate())
             {
-                archer.AddToScore(score);
-                if (score != 0)
-                    archer.AddHit();
-                if (score == 10)
-                    archer.AddTen();
-            }
+                endScore.Clear();
+                //take account of potential edits
 
-            archer.FinishEnd();
+                if (tbArch1Arr1.Text == "M" || tbArch1Arr1.Text == "m")
+                    endScore.Add(0);
+                if (tbArch1Arr2.Text == "M" || tbArch1Arr2.Text == "m")
+                    endScore.Add(0);
+                if (tbArch1Arr3.Text == "M" || tbArch1Arr3.Text == "m")
+                    endScore.Add(0);
 
-            if (nEnd < nTotalEnds)
-            {
-                nEnd++;
-                labelEnd.Content = "End " + nEnd + " of " + nTotalEnds;
+                if (int.TryParse(tbArch1Arr1.Text, out int arrow))      //should only fail if M/m as Vaidate checks inputs
+                    endScore.Add(arrow);
+                if (int.TryParse(tbArch1Arr2.Text, out arrow))
+                    endScore.Add(arrow);
+                if (int.TryParse(tbArch1Arr3.Text, out arrow))
+                    endScore.Add(arrow);
+
+                foreach (int score in endScore)
+                {
+                    archer.AddToScore(score);
+                    if (score != 0)
+                        archer.AddHit();
+                    if (score == 10)
+                        archer.AddTen();
+                }
+
+                archer.FinishEnd();
+
+                ClearArrowsFromTarget();                //make it clear the score has been accepted
+                EmptyScoreEntry();
+
+                if (nEnd < nTotalEnds)
+                {
+                    nEnd++;
+                    labelEnd.Content = "End " + nEnd + " of " + nTotalEnds;
+                }
+                else
+                {
+                    this.Visibility = Visibility.Hidden;
+                    ScoreSheet scoreSheet = new ScoreSheet(archer, this);
+                    scoreSheet.ShowDialog();
+                }
             }
-            else
-            {
-                this.Visibility = Visibility.Hidden;
-                ScoreSheet scoreSheet = new ScoreSheet(archer.GetTable(), this);
-                scoreSheet.ShowDialog();
-            }
+        }
+
+        private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePos = e.GetPosition(target);
+            FletchedGraphic arrow = new FletchedGraphic(mousePos);
+            lArrows.Add(arrow);
+
+            tempScore.Add(GetScore(mousePos));
+
+            UpdateTargetChildren();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -199,6 +231,7 @@ namespace ArcheryTool
             rs.Close();
         }
 
+        //Control setup
         private void SetupScoreEntryBoxes()
         {
             if(eRound == ERound.Fita18 || eRound == ERound.Portsmouth)
@@ -251,16 +284,48 @@ namespace ArcheryTool
             }
         }
 
+        private void EmptyScoreEntry()
+        {
+            tbArch1Arr1.Text = "";
+            tbArch1Arr2.Text = "";
+            tbArch1Arr3.Text = "";
+            tbArch1Arr4.Text = "";
+            tbArch1Arr5.Text = "";
+            tbArch1Arr6.Text = "";
+
+            tbArch2Arr1.Text = "";
+            tbArch2Arr2.Text = "";
+            tbArch2Arr3.Text = "";
+            tbArch2Arr4.Text = "";
+            tbArch2Arr5.Text = "";
+            tbArch2Arr6.Text = "";
+
+            tbArch3Arr1.Text = "";
+            tbArch3Arr2.Text = "";
+            tbArch3Arr3.Text = "";
+            tbArch3Arr4.Text = "";
+            tbArch3Arr5.Text = "";
+            tbArch3Arr6.Text = "";
+
+            tbArch4Arr1.Text = "";
+            tbArch4Arr2.Text = "";
+            tbArch4Arr3.Text = "";
+            tbArch4Arr4.Text = "";
+            tbArch4Arr5.Text = "";
+            tbArch4Arr6.Text = "";
+        }
+
+        //Target graphics
         private void UpdateTargetChildren()
         {
             target.Children.Clear();
             AddTargetGraphic();
 
-            if (lArrows.GetSize() > 0)
+            if (lArrows.GetNumElements() > 0)
             {
                 int head = lArrows.GetHead();
                 lArrows.ResetHead();
-                for (int i = 0; i < lArrows.GetNumElements(); i++)
+                for (int i = 0; i < lArrows.GetSize(); i++)
                 {
                     FletchedGraphic arrow = (FletchedGraphic)lArrows[i];
                     if (arrow != null)
@@ -271,7 +336,6 @@ namespace ArcheryTool
             }
         }
 
-        //Target Graphics
         private void AddTargetGraphic()
         {
             foreach (Ellipse ellipse in targetGraphics)

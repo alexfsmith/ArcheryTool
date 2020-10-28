@@ -1,18 +1,5 @@
 ﻿using ArcheryTool;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ArcheryTuningTool
 {
@@ -23,17 +10,36 @@ namespace ArcheryTuningTool
     {
         private string[,] data;
         private ScoreEntry se;
+        private int totHits;
+        private int totTens;
 
-        public ScoreSheet(string[,] data, ScoreEntry se)
+        public ScoreSheet(Archer archer, ScoreEntry se)
         {
             InitializeComponent();
-            this.data = data;
+
+            totHits = archer.GetTotalHits();
+            totTens = archer.GetTotalTens();
+            this.data = archer.GetTable();
             this.se = se;
+
+            Replace0WithM();
 
             FillGrid();
         }
 
-        private void FillGrid()
+        private void Replace0WithM()
+        {
+            for (int i = 0; i < data.GetLength(0); i++)
+            {
+                for (int j = 0; j < data.GetLength(1); j++)
+                {
+                    if (data[i, j] == "0")
+                        data[i, j] = "M";
+                }
+            }
+        }
+
+        private void FillGrid()                 //TODO: Finish work in main branch for using a DataTable/DataGrid so other round formats can be used
         {
             score1_1.Content = data[0, 0];
             score1_2.Content = data[1, 0];
@@ -130,11 +136,18 @@ namespace ArcheryTuningTool
             tens5.Content = data[16, 4];
             total5.Content = data[17, 4];
 
+            totalHits.Content = totHits.ToString();
+            totalTens.Content = totTens.ToString();
+            total.Content = data[17, 4];
+
         }
 
+        //Handlers
         private void BnSave_Click(object sender, RoutedEventArgs e)
         {
             //TODO
+            //Save as csv for use in History 
+             
         }
 
         private void BnClose_Click(object sender, RoutedEventArgs e)

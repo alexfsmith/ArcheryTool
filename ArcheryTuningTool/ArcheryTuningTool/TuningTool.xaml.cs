@@ -32,10 +32,10 @@ namespace ArcheryTool
         private int nDrawLength;
         private string sSpine;
         private double dArrowLength;
-        private int nBowLength;         //advanced
-        private int nStrands;           //advanced
-        private int nPointWeight;       //advanced
-        private string sStringMaterial; //advanced
+        private int nBowLength;         //advanced only
+        private int nStrands;           //advanced only
+        private int nPointWeight;       //advanced only
+        private string sStringMaterial; //advanced only
 
         public TuningTool()
         {
@@ -71,7 +71,19 @@ namespace ArcheryTool
             cbBareshaft.SelectedIndex = 0;
         }
 
-        //Message handlers for controls + canvas
+        private bool Validate()
+        {
+            int outInt;
+            double outDouble;
+
+            if (!int.TryParse(tbPoundage.Text, out outInt)) return false;
+            if (!int.TryParse(tbDrawLength.Text, out outInt)) return false;
+            if (!double.TryParse(tbArrowLength.Text, out outDouble)) return false;
+
+            return true;
+        }
+
+        //Handlers
         private void CbBowStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbBowStyle.SelectedItem)
@@ -102,11 +114,31 @@ namespace ArcheryTool
                 bRightHanded = false;
         }
 
+        private void CbFletched_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFletched.SelectedIndex == 0)
+                nFletched = 3;
+            else
+                nFletched = 6;
+            if (lFletched != null)
+                lFletched.SetNumElements(nFletched);
+        }
+
+        private void CbBareshaft_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (cbBareshaft.SelectedIndex == 0)
+                nBareshaft = 1;
+            else
+                nBareshaft = 2;
+            if (lBareshaft != null)
+                lBareshaft.SetNumElements(nBareshaft);
+        }
+
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
             if (Validate())
             {
-                nPoundage = int.Parse(tbPoundage.Text);
+                nPoundage = int.Parse(tbPoundage.Text);         //TODO: set focus to the incorrect field
                 nDrawLength = int.Parse(tbDrawLength.Text);
                 sSpine = tbSpine.Text;
                 dArrowLength = double.Parse(tbArrowLength.Text);
@@ -115,17 +147,6 @@ namespace ArcheryTool
             {
                 MessageBox.Show("Please check input and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-        }
-        private bool Validate()
-        {
-            int outInt;
-            double outDouble;
-
-            if (!int.TryParse(tbPoundage.Text, out outInt)) return false;
-            if (!int.TryParse(tbDrawLength.Text, out outInt)) return false;
-            if (!double.TryParse(tbArrowLength.Text, out outDouble)) return false;
-
-            return true;
         }
 
         private void Target_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -146,34 +167,35 @@ namespace ArcheryTool
             UpdateTargetChildren();
         }
 
+        //Target graphics
         private void UpdateTargetChildren()
         {
             target.Children.Clear();
             AddTargetGraphic();
 
-            if (lBareshaft.GetSize() > 0)
+            if (lBareshaft.GetNumElements() > 0)
             {
                 int head = lBareshaft.GetHead();
                 lBareshaft.SetHead(0);
-                for (int i = 0; i < lBareshaft.GetNumElements(); i++)
+                for (int i = 0; i < lBareshaft.GetSize(); i++)
                 {
                     BareshaftGraphic bareshaft = (BareshaftGraphic)lBareshaft[i];
                     if (bareshaft != null)
-                        target.Children.Add(bareshaft);
+                        target.Children.Add(bareshaft);                             //ienumerator will go through the whole array even if elements are null
                     lBareshaft.MoveNext();
                 }
                 lBareshaft.SetHead(head);
             }
 
-            if (lFletched.GetSize() > 0)
+            if (lFletched.GetNumElements() > 0)
             {
                 int head = lFletched.GetHead();
                 lFletched.SetHead(0);
-                for (int i = 0; i < lFletched.GetNumElements(); i++)
+                for (int i = 0; i < lFletched.GetSize(); i++)
                 {
                     FletchedGraphic fletched = (FletchedGraphic)lFletched[i];
                     if (fletched != null)
-                        target.Children.Add(fletched);      //ienumerator will go through the whole array even if elements are null
+                        target.Children.Add(fletched);      
                     lFletched.MoveNext();
                 }
                 lFletched.SetHead(head);
@@ -186,26 +208,6 @@ namespace ArcheryTool
             {
                 target.Children.Add(ellipse);
             }
-        }
-
-        private void CbFletched_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbFletched.SelectedIndex == 0)
-                nFletched = 3;
-            else
-                nFletched = 6;
-            if (lFletched != null)
-                lFletched.SetNumElements(nFletched);
-        }
-
-        private void CbBareshaft_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            if (cbBareshaft.SelectedIndex == 0)
-                nBareshaft = 1;
-            else
-                nBareshaft = 2;
-            if (lBareshaft != null)
-                lBareshaft.SetNumElements(nBareshaft);
         }
 
         private void SetupTenZoneTargetGraphics()

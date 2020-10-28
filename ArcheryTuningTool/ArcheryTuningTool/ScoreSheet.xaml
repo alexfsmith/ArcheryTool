@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArcheryTuningTool"
         mc:Ignorable="d"
-        Title="ScoreSheet" Height="360" Width="700" Closing="Window_Closing">
+        Title="Score Sheet" Height="400" Width="700" Closing="Window_Closing">
     <Grid>
         <Label x:Name="lbScoreSummary" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-        <Grid Margin="38,30,38,0" Width="615" HorizontalAlignment="Center" VerticalAlignment="Top" ShowGridLines="False" Height="240" >
+        <Grid Margin="38,30,38,0" Width="615" HorizontalAlignment="Center" VerticalAlignment="Top" ShowGridLines="False" Height="280" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
@@ -30,6 +30,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -137,6 +138,11 @@
             <Label x:Name="hits5" Grid.Column="15" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="tens5" Grid.Column="16" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="total5" Grid.Column="17" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label Content="Total" Grid.Column="14" Grid.Row="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="totalHits" Grid.Column="15" Grid.Row="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="totalTens" Grid.Column="16" Grid.Row="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="total" Grid.Column="17" Grid.Row="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,230,0,0"/>
@@ -145,6 +151,7 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,110,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,70,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="615" Margin="38,270,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="38,70,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="68,70,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="98,70,0,0"/>
@@ -159,10 +166,10 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="368,70,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="398,70,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="30" Margin="428,70,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="60" Margin="458,30,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="518,30,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="563,30,0,0"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="45" Margin="608,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="60" Margin="458,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="45" Margin="518,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="45" Margin="563,30,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="45" Margin="608,30,0,0"/>
 
         <Button x:Name="bnSave" Content="Save" Height="23" Width="75" Margin="0,0,110,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnSave_Click"/>
         <Button x:Name="bnClose" Content="Close" Height="23" Width="75" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BnClose_Click"/>

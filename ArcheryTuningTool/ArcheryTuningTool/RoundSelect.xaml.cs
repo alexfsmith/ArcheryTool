@@ -51,6 +51,7 @@ namespace ArcheryTool
             cbIndoor.Items.Add("Indoor");
             cbIndoor.Items.Add("Outdoor");
             cbIndoor.SelectedIndex = 0;
+            cbIndoor.IsEnabled = false;         //until functionality for 6 arrow rounds complete
 
             SetupRoundCombo(true);
 
@@ -82,7 +83,7 @@ namespace ArcheryTool
             cbRound.SelectedIndex = 0;
         }
 
-        //Message handlers for controls + canvas
+        //Handlers
         private void CbBowStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbBowStyle.SelectedItem)
@@ -91,7 +92,7 @@ namespace ArcheryTool
                     eBowStyle = EBowStyle.Recurve;
                     break;
                 case "Compound":
-                    eBowStyle = EBowStyle.Compound;
+                    eBowStyle = EBowStyle.Compound;     //TODO: add a compound 10 ring, especially in 5 zone
                     break;
                 case "Barebow Recurve":
                     eBowStyle = EBowStyle.Barebow;
@@ -139,15 +140,10 @@ namespace ArcheryTool
             nArchers = (int)cbNoArchers.SelectedItem;
         }
 
-        private void ChkSighters_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bSighters = !bSighters;
-        }
-
         private void BnOk_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
-            ScoreEntry score = new ScoreEntry(eRound, eBowStyle, nArchers, bSighters, this);
+            ScoreEntry score = new ScoreEntry(eRound, eBowStyle, nArchers, this);
             score.ShowDialog();
         }
 

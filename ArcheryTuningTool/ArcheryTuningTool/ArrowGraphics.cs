@@ -58,6 +58,9 @@ namespace ArcheryTool
         }
     }
 
+    /// <summary>
+    /// Custom shape for bareshaft arrow graphic
+    /// </summary>
     class BareshaftGraphic : Shape
     {
         public BareshaftGraphic(Point mouse)
